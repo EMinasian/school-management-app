@@ -1,11 +1,21 @@
-import { useLoaderData } from "react-router-dom";
+import { useEffect, useState } from "react";
 import CustomList from "../Components/CustomList"
-import teachers from "../mockData/teachers.json"
 import { ListItem } from "@mui/material"
 import TeacherListItem from "../Components/TeacherListItem"
+import { getTeachers } from "../utils/teachers";
 
 const TeachersList = () => {
-    const teachers = useLoaderData()
+
+    const [teachers, setTeachers] = useState([])
+    
+    useEffect(() => {
+        const fetchTeachers = async () => {
+            const teachersData = await getTeachers()
+            setTeachers(teachersData)
+        }
+        fetchTeachers()
+    }, [])
+
     return (
         <CustomList>
             {
@@ -19,9 +29,4 @@ const TeachersList = () => {
     )
 }
 
-const loader = () => {
-    return teachers
-}
-
 export default TeachersList
-export { loader }
