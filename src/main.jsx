@@ -5,6 +5,8 @@ import Login from './Routes/Login';
 import DashboardLayout from './Routes/DashboardLayout';
 import TeachersList from './Routes/TeachersList';
 import SubjectsList from './Routes/SubjectsList';
+import Teacher, { loader as TeacherLoader } from './Routes/Teacher';
+import Subject, { loader as SubjectLoader } from './Routes/Subject';
 import './index.css'
 
 const router = createBrowserRouter([
@@ -17,7 +19,9 @@ const router = createBrowserRouter([
     element: <DashboardLayout />,
     children: [
       { path: "/dashboard/teachers", element: <TeachersList /> },
+      { path: "/dashboard/teachers/:id", element: <Teacher />, loader: TeacherLoader },
       { path: "/dashboard/subjects", element: <SubjectsList /> },
+      { path: "/dashboard/subjects/:id", element: <Subject />, loader: SubjectLoader },
     ],
   },
 ]);

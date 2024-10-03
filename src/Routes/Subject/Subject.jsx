@@ -1,13 +1,13 @@
 import { useLoaderData } from "react-router-dom";
 
-const Teacher = () => {
-    const teacher = useLoaderData()
-    return (<p>{`A teacher: ${teacher}`}</p>)
+const Subject = () => {
+    const subject = useLoaderData()
+    return (<p>{`A subject: ${subject}`}</p>)
 }
 
 const loader = ({ params }) => {
     return params?.id
 }
 
-export default Teacher
+export default Subject
 export { loader }

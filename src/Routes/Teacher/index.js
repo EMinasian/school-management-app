@@ -1,3 +1,4 @@
-import Teacher from "./Teacher";
+import Teacher, { loader } from "./Teacher";
 
 export default Teacher
+export { loader }
