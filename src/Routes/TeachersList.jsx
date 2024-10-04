@@ -19,7 +19,7 @@ const TeachersList = () => {
         <CustomList>
             {
                 teachers.map(teacher => 
-                    <CustomListItem id={teacher.id} label={`${teacher.firstname} ${teacher.lastname}`}/>
+                    <CustomListItem id={teacher.id} label={`${teacher.firstname} ${teacher.lastname}`} entity='teachers'/>
                 )
             }
         </CustomList>

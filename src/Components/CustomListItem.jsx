@@ -1,6 +1,6 @@
-import { ListItemText, ListItem } from "@mui/material"
+import { ListItemText, ListItem, Container, Link } from "@mui/material"
 
-const CustomListItem = ({ id, label }) => {
+const CustomListItem = ({ id, label, entity }) => {
     
     if (!label) {
         return null
@@ -9,6 +9,10 @@ const CustomListItem = ({ id, label }) => {
     return (
         <ListItem key={id}>
             <ListItemText fontSize='' primary={label} sx={{fontSize: 30, color: '#0B192C'}}/>
+            <Container sx={{display: 'flex', justifyContent: 'end'}}>
+                <Link underline="hover" color="primary" href={`/dashboard/${entity}/${id}`}>More information</Link>
+            </Container>
+
         </ListItem>
     )
 }

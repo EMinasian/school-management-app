@@ -19,7 +19,7 @@ const SubjectsList = () => {
         <CustomList>
             {
                 subjects.map(sujbect => 
-                    <CustomListItem id={sujbect.id} label={sujbect.title} />
+                    <CustomListItem id={sujbect.id} label={sujbect.title} entity='subjects'/>
                 )
             }
         </CustomList>
