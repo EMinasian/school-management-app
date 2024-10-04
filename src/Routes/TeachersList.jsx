@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import CustomList from "../Components/CustomList"
-import { ListItem } from "@mui/material"
-import TeacherListItem from "../Components/TeacherListItem"
+import CustomListItem from "../Components/CustomListItem";
 import { getTeachers } from "../utils/teachers";
 
 const TeachersList = () => {
@@ -20,9 +19,7 @@ const TeachersList = () => {
         <CustomList>
             {
                 teachers.map(teacher => 
-                    <ListItem key={teacher.id}>
-                        <TeacherListItem teacher={teacher} />
-                    </ListItem>
+                    <CustomListItem id={teacher.id} label={`${teacher.firstname} ${teacher.lastname}`}/>
                 )
             }
         </CustomList>
