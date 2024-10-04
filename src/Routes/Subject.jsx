@@ -4,6 +4,7 @@ import CustomList from "../Components/CustomList";
 import CustomListItem from "../Components/CustomListItem";
 import { getSubjectById } from "../utils/subjects";
 import CustomTitle from "../Components/CustomTitle";
+import { Typography } from "@mui/material";
 
 const Subject = () => {
     const subjectSlug = useLoaderData()
@@ -21,16 +22,20 @@ const Subject = () => {
     if (!subject) {
         return null
     }
-
-
     console.log(subject)
-    const { title, students } = subject
+    const { title, description, students } = subject
 
 
     return (
         <>
-            <CustomTitle>
+            <CustomTitle intent='primary'>
                 {title}
+            </CustomTitle>
+            <Typography color="white" paragraph sx={{fontSize: 18}}>
+                {description}
+            </Typography>
+            <CustomTitle>
+                Enrolled students:
             </CustomTitle>
             <CustomList>
                 {

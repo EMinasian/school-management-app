@@ -18,7 +18,7 @@ const SubjectsList = () => {
 
     return (
         <>
-            <CustomTitle>
+            <CustomTitle intent='primary'>
                 Oversall List of Subjects
             </CustomTitle>
             <CustomList>

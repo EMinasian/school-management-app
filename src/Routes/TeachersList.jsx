@@ -18,7 +18,7 @@ const TeachersList = () => {
 
     return (
         <>
-            <CustomTitle>
+            <CustomTitle intent='primary'>
                 Oversall List of Teachers
             </CustomTitle>
             <CustomList>
