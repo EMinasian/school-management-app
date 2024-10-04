@@ -3,7 +3,7 @@ import { useLoaderData } from "react-router-dom";
 import CustomList from "../Components/CustomList";
 import CustomListItem from "../Components/CustomListItem";
 import { getSubjectById } from "../utils/subjects";
-import CustomTitle from "../Components/CustumTitle";
+import CustomTitle from "../Components/CustomTitle";
 
 const Subject = () => {
     const subjectSlug = useLoaderData()

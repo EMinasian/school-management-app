@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import CustomList from "../Components/CustomList"
 import CustomListItem from "../Components/CustomListItem";
-import CustomTitle from "../Components/CustumTitle";
+import CustomTitle from "../Components/CustomTitle";
 import { getSubjectTitles } from "../utils/subjects";
 
 const SubjectsList = () => {
