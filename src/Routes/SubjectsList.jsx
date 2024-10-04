@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import CustomList from "../Components/CustomList"
 import CustomListItem from "../Components/CustomListItem";
+import CustomTitle from "../Components/CustumTitle";
 import { getSubjectTitles } from "../utils/subjects";
 
 const SubjectsList = () => {
@@ -16,14 +17,18 @@ const SubjectsList = () => {
     }, [])
 
     return (
-        <CustomList>
-            {
-                subjects.map(sujbect => 
-                    <CustomListItem id={sujbect.id} label={sujbect.title} entity='subjects'/>
-                )
-            }
-        </CustomList>
-
+        <>
+            <CustomTitle>
+                Oversall List of Subjects
+            </CustomTitle>
+            <CustomList>
+                {
+                    subjects.map(sujbect => 
+                        <CustomListItem id={sujbect.id} label={sujbect.title} entity='subjects'/>
+                    )
+                }
+            </CustomList>
+        </>
     )
 }
 

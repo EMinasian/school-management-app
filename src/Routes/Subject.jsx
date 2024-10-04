@@ -3,6 +3,7 @@ import { useLoaderData } from "react-router-dom";
 import CustomList from "../Components/CustomList";
 import CustomListItem from "../Components/CustomListItem";
 import { getSubjectById } from "../utils/subjects";
+import CustomTitle from "../Components/CustumTitle";
 
 const Subject = () => {
     const subjectSlug = useLoaderData()
@@ -23,11 +24,14 @@ const Subject = () => {
 
 
     console.log(subject)
-    const { students } = subject
+    const { title, students } = subject
 
 
     return (
         <>
+            <CustomTitle>
+                {title}
+            </CustomTitle>
             <CustomList>
                 {
                     students.map(student => 
