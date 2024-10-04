@@ -15,7 +15,7 @@ const getTeachers = async () => {
         }
     `
 
-    const { data } = await getGraphqlData(query)
+    const { data } = await getGraphqlData({ query })
 
     if (!data?.teachers) {
         return null

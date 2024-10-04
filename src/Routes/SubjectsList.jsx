@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import CustomList from "../Components/CustomList"
 import CustomListItem from "../Components/CustomListItem";
-import { getSubjects } from "../utils/subjects";
+import { getSubjectTitles } from "../utils/subjects";
 
 const SubjectsList = () => {
 
@@ -9,7 +9,7 @@ const SubjectsList = () => {
     
     useEffect(() => {
         const fetchTeachers = async () => {
-            const subjectsData = await getSubjects()
+            const subjectsData = await getSubjectTitles()
             setSubjects(subjectsData)
         }
         fetchTeachers()

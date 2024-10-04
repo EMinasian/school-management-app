@@ -9,8 +9,10 @@ const CustomListItem = ({ id, label, entity }) => {
     return (
         <ListItem key={id}>
             <ListItemText fontSize='' primary={label} sx={{fontSize: 30, color: '#0B192C'}}/>
-            <Container sx={{display: 'flex', justifyContent: 'end'}}>
-                <Link underline="hover" color="primary" href={`/dashboard/${entity}/${id}`}>More information</Link>
+            <Container maxWidth='sm' sx={{display: 'flex', justifyContent: 'end'}}>
+                {
+                    entity && <Link underline="hover" color="primary" href={`/dashboard/${entity}/${id}`}>More information</Link>
+                }
             </Container>
 
         </ListItem>

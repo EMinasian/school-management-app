@@ -1,8 +1,8 @@
-const getGraphqlData = async (query) => {
+const getGraphqlData = async (bodyObject) => {
 
     try {
         const response = await fetch('http://localhost:3000/graphql', {
-            body: JSON.stringify({ query }),
+            body: JSON.stringify(bodyObject),
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
