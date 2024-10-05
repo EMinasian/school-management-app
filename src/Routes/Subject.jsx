@@ -3,7 +3,7 @@ import { useLoaderData } from "react-router-dom";
 import CustomList from "../Components/CustomList";
 import { getSubjectById, cancelEnrollment } from "../utils/subjects";
 import CustomTitle from "../Components/CustomTitle";
-import { ListItemText, ListItem, Typography, Button } from "@mui/material"
+import { ListItemText, ListItem, Typography, Button, Modal, FormGroup, TextField } from "@mui/material"
 
 
 const StudentListItem = ({ id, firstname, lastname, handleRemove }) => {
@@ -42,6 +42,7 @@ const Subject = () => {
     const subjectSlug = useLoaderData()
 
     const [subject, setSubject] = useState(null)
+    const [openModal, setOpenModal] = useState(false)
     
     useEffect(() => {
         const fetchTeachers = async () => {
@@ -72,6 +73,29 @@ const Subject = () => {
                 {description}
             </Typography>
             <StudentsList students={students} handleRemove={handleStudentRemove} />
+            <Button sx={{backgroundColor: '#E2F1E7', padding: 2, margin: 2}} onClick={() => setOpenModal(true)}>Enroll Student</Button>
+            <Modal
+                open={openModal}
+                onClose={() => setOpenModal(false)}
+                >
+                <form>
+                    <FormGroup sx={{width: 500, height: 300, backgroundColor: '#E2F1E7', borderRadius: 5, display: 'flex', flexDirection: 'column', gap: 4, padding: 5, justifyContent:' center'}}>
+                        <TextField
+                            namme='studentId'
+                            placeholder="Student's ID (student number)"
+                            variant="standard"
+                            onChange={null}
+                        />
+                        <TextField
+                            namme='subjectId'
+                            placeholder="Subject's code"
+                            variant="standard"
+                            onChange={null}
+                        />
+                        <Button onClick={null} sx={{ fontSize: 20, fontWeight: 600, paddingY: 1, paddingX: 3, background: '#FF6500', borderRadius: 2, minWidth: 6, color: 'white'}}>Submit</Button>
+                    </FormGroup>
+                </form>
+            </Modal>
         </>
     )
 }
