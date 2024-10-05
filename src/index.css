@@ -2,6 +2,7 @@ body {
   background-color: #FFCFB3;
   height: 100%;
   margin: 0;
+
 }
 
 html {
@@ -10,4 +11,9 @@ html {
 
 #root {
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+  align-content: center;
 }
