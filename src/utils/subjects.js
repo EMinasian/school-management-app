@@ -47,7 +47,7 @@ const getSubjectById = async (subjectId) => {
 const cancelEnrollment = async (subjectId, studentId) => {
     const query = gql`
         mutation {
-        deleteEnrollment(subjectId: ${subjectId}, studentId: ${studentId}) {
+            deleteEnrollment(subjectId: ${subjectId}, studentId: ${studentId}) {
                 id
                 title
                 description
@@ -69,4 +69,29 @@ const cancelEnrollment = async (subjectId, studentId) => {
     return data?.deleteEnrollment?.[0]
 }
 
-export { getSubjectTitles, getSubjectById, cancelEnrollment }
+const enrollStudent = async (subjectId, studentId) => {
+    const query = gql`
+        mutation {
+            enrollStudent(subjectId: ${subjectId}, studentId: ${studentId}) {
+                id
+                title
+                description
+                class
+                teacher {
+                    firstname
+                    lastname
+                }
+                students {
+                    id
+                    firstname
+                    lastname
+                }
+            }
+        }
+`
+
+    const { data } = await getGraphqlData({ query })
+    return data?.enrollStudent?.[0]
+}
+
+export { getSubjectTitles, getSubjectById, cancelEnrollment, enrollStudent }

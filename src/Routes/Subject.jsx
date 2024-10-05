@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useLoaderData } from "react-router-dom";
 import CustomList from "../Components/CustomList";
-import { getSubjectById, cancelEnrollment } from "../utils/subjects";
+import { getSubjectById, cancelEnrollment, enrollStudent } from "../utils/subjects";
 import CustomTitle from "../Components/CustomTitle";
 import { ListItemText, ListItem, Typography, Button, Modal, FormGroup, TextField } from "@mui/material"
 
@@ -43,6 +43,8 @@ const Subject = () => {
 
     const [subject, setSubject] = useState(null)
     const [openModal, setOpenModal] = useState(false)
+
+    const studentIdRef = useRef();
     
     useEffect(() => {
         const fetchTeachers = async () => {
@@ -63,6 +65,11 @@ const Subject = () => {
         setSubject(newSubjectData)
     }
 
+    const handleSubmitEmrollment = async () => {
+        const newSubjectData = await enrollStudent(subjectId, studentIdRef.current.value)
+        setOpenModal(false)
+        setSubject(newSubjectData)
+    }
 
     return (
         <>
@@ -84,15 +91,9 @@ const Subject = () => {
                             namme='studentId'
                             placeholder="Student's ID (student number)"
                             variant="standard"
-                            onChange={null}
+                            inputRef={studentIdRef}
                         />
-                        <TextField
-                            namme='subjectId'
-                            placeholder="Subject's code"
-                            variant="standard"
-                            onChange={null}
-                        />
-                        <Button onClick={null} sx={{ fontSize: 20, fontWeight: 600, paddingY: 1, paddingX: 3, background: '#FF6500', borderRadius: 2, minWidth: 6, color: 'white'}}>Submit</Button>
+                        <Button onClick={handleSubmitEmrollment} sx={{ fontSize: 20, fontWeight: 600, paddingY: 1, paddingX: 3, background: '#FF6500', borderRadius: 2, minWidth: 6, color: 'white'}}>Submit</Button>
                     </FormGroup>
                 </form>
             </Modal>
