@@ -96,7 +96,6 @@ const enrollStudent = async (subjectId, studentId) => {
 
 const updateSubjectInfo = async (subjectId, title, description) => {
 
-    console.log(subjectId, title, description)
     const query = gql`
         mutation {
             editSubject(subjectId: ${subjectId}, title: "${title}", description: "${description}") {
