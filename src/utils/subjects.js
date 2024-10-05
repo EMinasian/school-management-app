@@ -94,4 +94,29 @@ const enrollStudent = async (subjectId, studentId) => {
     return data?.enrollStudent?.[0]
 }
 
-export { getSubjectTitles, getSubjectById, cancelEnrollment, enrollStudent }
+const updateSubjectInfo = async (subjectId, title, description) => {
+    const query = gql`
+        mutation {
+            editSubject(subjectId: ${subjectId}, title: ${title}, description: ${description}) {
+                id
+                title
+                description
+                class
+                teacher {
+                    firstname
+                    lastname
+                }
+                students {
+                    id
+                    firstname
+                    lastname
+                }
+            }
+        }
+`
+
+    const { data } = await getGraphqlData({ query })
+    return data?.editSubject?.[0]
+}
+
+export { getSubjectTitles, getSubjectById, cancelEnrollment, enrollStudent, updateSubjectInfo }
