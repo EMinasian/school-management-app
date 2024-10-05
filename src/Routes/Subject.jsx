@@ -1,10 +1,42 @@
 import { useState, useEffect } from "react";
 import { useLoaderData } from "react-router-dom";
 import CustomList from "../Components/CustomList";
-import CustomListItem from "../Components/CustomListItem";
-import { getSubjectById } from "../utils/subjects";
+import { getSubjectById, cancelEnrollment } from "../utils/subjects";
 import CustomTitle from "../Components/CustomTitle";
-import { Typography } from "@mui/material";
+import { ListItemText, ListItem, Typography, Button } from "@mui/material"
+
+
+const StudentListItem = ({ id, firstname, lastname, handleRemove }) => {
+    if (!firstname || !lastname || !id) {
+        return null
+    }
+
+    return (
+        <ListItem key={id}>
+            <ListItemText fontSize='' primary={`${firstname} ${lastname}`} sx={{fontSize: 30, color: '#0B192C'}}/>
+            <Button onClick={(e) => { handleRemove(id)} }>Remove</Button>
+        </ListItem>
+    )
+}
+
+const StudentsList = ({ students, handleRemove }) => {
+
+    return (
+        <>
+            <CustomTitle>
+                Enrolled students:
+            </CustomTitle>
+            <CustomList>
+                {
+                    students?.map(student => {
+                        const { id: studentId, firstname, lastname } = student
+                        return <StudentListItem id={studentId} firstname={firstname} lastname={lastname} handleRemove={handleRemove}/>
+                    })
+                }
+            </CustomList>
+        </>
+    )
+}
 
 const Subject = () => {
     const subjectSlug = useLoaderData()
@@ -22,8 +54,13 @@ const Subject = () => {
     if (!subject) {
         return null
     }
-    console.log(subject)
-    const { title, description, students } = subject
+
+    const { id: subjectId, title, description, students } = subject
+
+    const handleStudentRemove = async (studentId) => {
+        const newSubjectData = await cancelEnrollment(subjectId, studentId)
+        setSubject(newSubjectData)
+    }
 
 
     return (
@@ -34,16 +71,7 @@ const Subject = () => {
             <Typography color="white" paragraph sx={{fontSize: 18}}>
                 {description}
             </Typography>
-            <CustomTitle>
-                Enrolled students:
-            </CustomTitle>
-            <CustomList>
-                {
-                    students.map(student => 
-                        <CustomListItem id={student} label={`${student.firstname} ${student.lastname}`} />
-                    )
-                }
-            </CustomList>
+            <StudentsList students={students} handleRemove={handleStudentRemove} />
         </>
     )
 }
