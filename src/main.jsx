@@ -1,7 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import Login from './Routes/Login';
+import Authentication from './Routes/Authentication';
 import DashboardLayout from './Routes/DashboardLayout';
 import TeachersList from './Routes/TeachersList';
 import SubjectsList from './Routes/SubjectsList';
@@ -12,8 +12,8 @@ import './index.css'
 
 const router = createBrowserRouter([
   {
-    path: "/login",
-    element: <Login />
+    path: "/auth",
+    element: <Authentication />
   },
   {
     path: "/dashboard",

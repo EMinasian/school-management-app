@@ -67,8 +67,6 @@ const Subject = () => {
     })
 
     const studentIdRef = useRef();
-    const titleRef = useRef(null);
-    const descriptionRef = useRef('some');
     
     useEffect(() => {
         const fetchTeachers = async () => {
