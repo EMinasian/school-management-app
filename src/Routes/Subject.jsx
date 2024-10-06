@@ -94,11 +94,11 @@ const Subject = () => {
 
         const studentId = Number(studentIdRef.current.value)
 
-        if (!studentId) {
-            setEnrollmentError('Please insert an ID!')
+        if (!studentId || Number.isNaN(studentId)) {
+            setEnrollmentError('Please insert a valid ID!')
             return
         }
-        
+
         // check if the student is already enrolled
         const isEnrolled = students.map(({ id }) => id).includes(studentId)
         if(isEnrolled) {
