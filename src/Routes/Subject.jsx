@@ -59,6 +59,7 @@ const Subject = () => {
 
     const [subject, setSubject] = useState(null)
     const [openModal, setOpenModal] = useState(false)
+    const [enrollmentError, setEnrollmentError] = useState('')
     const [editMode, setEditMode] = useState(false)
     const [formData, setFormData] = useState({
         title: '',
@@ -90,7 +91,23 @@ const Subject = () => {
     }
 
     const handleSubmitEmrollment = async () => {
-        const newSubjectData = await enrollStudent(subjectId, studentIdRef.current.value)
+
+        const studentId = Number(studentIdRef.current.value)
+
+        if (!studentId) {
+            setEnrollmentError('Please insert an ID!')
+            return
+        }
+        
+        // check if the student is already enrolled
+        const isEnrolled = students.map(({ id }) => id).includes(studentId)
+        if(isEnrolled) {
+            console.log(isEnrolled)
+            setEnrollmentError('The student is already enrolled!')
+            return
+        }
+
+        const newSubjectData = await enrollStudent(subjectId, studentId)
         setOpenModal(false)
         setSubject(newSubjectData)
     }
@@ -142,7 +159,11 @@ const Subject = () => {
                             placeholder="Student's ID (student number)"
                             variant="standard"
                             inputRef={studentIdRef}
+                            required
                         />
+                        <Typography color="red" paragraph sx={{fontSize: 18, fontWeight: 600, marginTop: 10}}>
+                            {enrollmentError}
+                        </Typography>
                         <Button onClick={handleSubmitEmrollment} sx={{ fontSize: 20, fontWeight: 600, paddingY: 1, paddingX: 3, background: '#FF6500', borderRadius: 2, minWidth: 6, color: 'white'}}>Submit</Button>
                     </FormGroup>
                 </form>
