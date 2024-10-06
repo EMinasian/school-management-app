@@ -90,7 +90,19 @@ const enrollStudent = async (subjectId, studentId) => {
         }
 `
 
-    const { data } = await getGraphqlData({ query })
+    const response = await getGraphqlData({ query })
+
+    if (response.errors) {
+        const { errors } =  response
+        
+        if (errors?.[0]?.message === "FOREIGN KEY constraint failed") {
+            return { error: 'notExisting' }
+        } else {
+            return { error: 'dataBase' }
+        }
+    }
+
+    const { data } = response
     return data?.enrollStudent?.[0]
 }
 

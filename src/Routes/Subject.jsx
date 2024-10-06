@@ -102,12 +102,21 @@ const Subject = () => {
         // check if the student is already enrolled
         const isEnrolled = students.map(({ id }) => id).includes(studentId)
         if(isEnrolled) {
-            console.log(isEnrolled)
             setEnrollmentError('The student is already enrolled!')
             return
         }
 
         const newSubjectData = await enrollStudent(subjectId, studentId)
+
+        if (newSubjectData.error) {
+            const { error } = newSubjectData
+            if (error === 'notExisting') {
+                setEnrollmentError('The student is not registered for this year!')
+            } else {
+                setEnrollmentError('Error: please contact the support team!')
+            }
+            return
+        }
         setOpenModal(false)
         setSubject(newSubjectData)
     }
